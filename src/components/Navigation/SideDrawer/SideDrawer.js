@@ -13,14 +13,14 @@ const SideDrawerWrapper = styled.div`
     left: 0;
     top: 0;
     z-index: 200;
-    background-color: white;
+    background-color: ${props => props.theme.palette.background.default};
     padding: 32px 16px;
     box-sizing: border-box;
     transition: transform 0.3s ease-out;
-    @media (min-width: 500px) {
+    @media (min-width: 768px) {
         display: none;
     }
-    ${ ( { opened } ) => opened ?  'transform: translateX(0);' : 'transform: translateX(-100);' }
+    ${ ( { opened } ) => opened ?  'transform: translateX(0);' : 'transform: translateX(-100%);' }
 `
 
 
