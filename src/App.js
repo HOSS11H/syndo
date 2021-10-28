@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router';
+import styled from 'styled-components';
+import Layout from './components/Layout/Layout';
+import Home from './pages/Home/Home';
+
+
+const AppWrapper = styled.div`
+  background-color: ${props => props.theme.palette.background.default};
+  min-height: 100vh;
+`
 
 function App() {
+
+  const routes = (
+      <Route path='/' component={Home} />
+    )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppWrapper>
+      <Layout>
+        { routes }
+      </Layout>
+    </AppWrapper>
   );
 }
 
