@@ -1,8 +1,11 @@
 import { useCallback, useState , Fragment } from "react";
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from "../Navigation/SideDrawer/SideDrawer";
+import styled from 'styled-components';
 
-
+const Main = styled.main`
+    overflow-x: hidden;
+`
 
 const Layout = props => {
     
@@ -21,9 +24,9 @@ const Layout = props => {
                 <SideDrawer opened={sideDrawerState} 
                     event={sideDrawerCancelHandler} 
                     authentication={props.isAuth} />
-                <main>
+                <Main>
                     {props.children}
-                </main>
+                </Main>
             </Fragment>
     )
 

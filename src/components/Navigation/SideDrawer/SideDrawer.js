@@ -4,6 +4,7 @@ import Backdrop from '../../UI/Backdrop/Backdrop';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import styled from 'styled-components';
 import Logo from '../../Logo/Logo';
+import { NavLink } from 'react-router-dom';
 
 const SideDrawerWrapper = styled.div`
     position: fixed;
@@ -28,16 +29,16 @@ const SideDrawerWrapper = styled.div`
     ${ ( { opened } ) => opened ?  'transform: translateX(0);' : 'transform: translateX(-100%);' }
 `
 
-const Button = styled.button`
+const Button = styled(NavLink)`
     font-size:14px;
     font-weight: 700;
     padding: 0 20px;
-    height: 30px;
+    height: 45px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.dark : theme.vars.white };;
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.dark : theme.vars.white };
     border:0;
     outline: none;
     cursor: pointer;
@@ -45,7 +46,7 @@ const Button = styled.button`
     transition: 0.3s ease-in-out;
     margin: 0px auto;
     &:hover {
-        color: ${ ( { theme } ) => theme.vars.primary };;
+        color: ${ ( { theme } ) => theme.vars.primary };
     }
     @media screen and (min-width: 768px) {
         display: none;
@@ -67,7 +68,7 @@ const SideDrawer = ( props ) => {
                 <nav onClick={closeSideDrawer}>
                     <NavigationItems isAuth={authCtx.isLoggedIn} />
                 </nav>
-                <Button onClick={closeSideDrawer}>Get started</Button>
+                <Button to='/posts' onClick={closeSideDrawer}>Get started</Button>
             </SideDrawerWrapper>
 
         </React.Fragment>

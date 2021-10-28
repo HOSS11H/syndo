@@ -1,6 +1,8 @@
+import Hero from "../../components/Hero/Hero";
+
 const Home = props => {
     return (
-        <div></div>
+        <Hero />
     )
 }
 

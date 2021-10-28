@@ -11,7 +11,7 @@ const NavigationItemsWrapper = styled.ul`
     flex-flow: column;
     align-items: center;
     height: 100%;
-    justif-content: center;
+    justify-content: center;
     text-align: center;
     margin-bottom: 50px;
     @media (min-width: 768px) {

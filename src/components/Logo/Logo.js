@@ -10,10 +10,8 @@ const LogoWrapper =styled(NavLink)`
     align-items: center;
     font-size: 36px;
     text-decoration: none;
-    margin-bottom: 20px
     @media (min-width: 768px) {
         height: 80%;
-        margin-bottom: 0px
     }
 `
 const LogoSpan =styled.span`

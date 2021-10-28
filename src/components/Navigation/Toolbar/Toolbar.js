@@ -3,6 +3,7 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import Logo from '../../Logo/Logo';
 import Container from '@mui/material/Container';
+import { NavLink } from 'react-router-dom';
 
 const ContainerWrapper = styled.div`
     display: flex;
@@ -37,7 +38,7 @@ const Nav = styled.nav`
     align-items: center;
 `
 
-const Button = styled.button`
+const Button = styled(NavLink)`
     font-size:14px;
     font-weight: 700;
     padding: 0 20px;
@@ -46,7 +47,7 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.dark : theme.vars.white };;
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.dark : theme.vars.white };
     border:0;
     outline: none;
     cursor: pointer;
@@ -73,7 +74,7 @@ const Toolbar = (props) => {
                     <Nav>
                         <NavigationItems />
                     </Nav>
-                    <Button>Get started</Button>
+                    <Button to='/posts'>Get started</Button>
                 </NavWrapper>
             </ContainerWrapper>
         </Container>
