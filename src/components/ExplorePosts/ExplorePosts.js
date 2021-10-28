@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import { useHistory } from 'react-router-dom';
 import Heading from '../UI/Heading/Heading';
 import { NextButton } from '../UI/Nav/Nav';
-import Post from '../Post/Post';
+import Post from './Post/Post';
 import Resala from '../../images/logos/resala.jpg';
 import AhlMasr from '../../images/logos/AhlMasr.png';
 
@@ -110,7 +110,7 @@ const ExplorePosts = ( ) => {
 
     const loadedPosts = fetchedPosts.map( (post) => {
         return (
-            <Grid item key={post.id} sm={6} md={3} lg={3}>
+            <Grid item key={post.id} sm={6} md={3}>
                 <Post id={ post.id } title={ post.title } img={post.img} endDate={post.endDate} desc={post.desc} progress={post.progress} infos={post.infos} tags={post.tags} />
             </Grid>
         )

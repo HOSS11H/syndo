@@ -16,7 +16,7 @@ const ProgressValue = styled.p`
 
 export default function LinearProgressWithLabel(props) {
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '7px' }}>
             <Box sx={{ width: '100%', mr: 1, }}>
                 <BorderLinearProgress variant="determinate" {...props} sx={ { height: '5px', backgroundColor: 'transparent', } } />
             </Box>

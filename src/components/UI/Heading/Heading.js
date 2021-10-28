@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Heading = styled.h3`
-    font-size: 34px;
+    font-size: 36px;
     font-weight: 700;
     text-transform: capitalize;
     margin-bottom: ${ ( { margin }  ) => margin };

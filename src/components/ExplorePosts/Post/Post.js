@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LinearProgressWithLabel from '../UI/LinearProgress/LinearProgress';
+import LinearProgressWithLabel from '../../UI/LinearProgress/LinearProgress';
 
 
 const PostWrapper = styled.div`
@@ -80,7 +80,7 @@ const PostInfos = styled.table`
         }
         &:last-child {
             td {
-                padding-bottom: 20px;
+                padding-bottom: 15px;
             }
         }
     }
@@ -100,7 +100,7 @@ const Tag = styled.span`
     border-radius: 8px;
     background-color: #e3e3e3;
     font-size: 11px;
-    font-weight: 400;
+    font-weight: 500;
     text-transform: capitalize;
     color: ${ ( { theme } ) =>  theme.vars.black };
     margin-right: 4px;
