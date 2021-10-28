@@ -22,7 +22,7 @@ export const ThemeContextProvider = props => {
             createTheme({
                 vars: {
                     primary: '#00acb1',
-                    black: '#00000',
+                    black: '#000000',
                     white: '#f4f4f4',
                 },
                 palette: {

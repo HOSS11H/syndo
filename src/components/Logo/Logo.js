@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const LogoWrapper =styled(NavLink)`
     height: 11%;
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
     text-transform: capitalize;
     display: flex;
     justify-content: center;

@@ -41,7 +41,7 @@ const HeroTitle = styled.h1`
     font-weight: 700;
     text-transform: capitalize;
     margin-bottom: 22px;
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
     @media screen and (max-width: 767.98px) {
         font-size: 32px
     }
@@ -51,7 +51,7 @@ const HeroDesc = styled.p`
     font-weight: 700;
     text-transform: capitalize;
     margin-bottom: 44px;
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
     @media screen and (max-width: 767.98px) {
         font-size: 24px
     }
@@ -66,14 +66,14 @@ const HeroButton = styled(NavLink)`
     justify-content: center;
     align-items: center;
     background-color: ${ ( { theme } ) => theme.vars.primary  };
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
     border:0;
     outline: none;
     cursor: pointer;
     border-radius: 8px;
     transition: 0.3s ease-in-out;
     &:hover {
-        color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.dark : theme.vars.white };
+        color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.black : theme.vars.white };
     }
 `
 

@@ -23,7 +23,7 @@ const NavigationItemWrapper = styled.li`
 `
 
 const StyledLink = styled(NavLink)`
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
     text-decoration: none;
     text-transform: capitalize;
     width: 100%;

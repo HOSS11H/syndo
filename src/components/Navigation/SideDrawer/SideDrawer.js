@@ -37,8 +37,8 @@ const Button = styled(NavLink)`
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
-    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.dark : theme.vars.white };
+    background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.black : theme.vars.white };
     border:0;
     outline: none;
     cursor: pointer;
