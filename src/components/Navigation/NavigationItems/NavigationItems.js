@@ -11,8 +11,12 @@ const NavigationItemsWrapper = styled.ul`
     flex-flow: column;
     align-items: center;
     height: 100%;
-    @media (min-width: 500px) {
+    justif-content: center;
+    text-align: center;
+    margin-bottom: 50px;
+    @media (min-width: 768px) {
         flex-flow: row;
+        margin-bottom: 0px
     }
 `
 
@@ -22,9 +26,8 @@ const NavigationItems = ( props ) => {
     
     return (
         <NavigationItemsWrapper >
-            <NavigationItem link='/' exact>store</NavigationItem>
-            {authCtx.isLoggedIn && <NavigationItem link='/cart' >cart</NavigationItem> }
-            {authCtx.isLoggedIn && <NavigationItem link='/orders' >orders</NavigationItem> }
+            <NavigationItem link='/posts' exact>posts</NavigationItem>
+            <NavigationItem link='/testimonials' exact>testimonials</NavigationItem>
             {!authCtx.isLoggedIn
             ? <NavigationItem link='/auth' >login</NavigationItem>
             : <NavigationItem link='/logout' >logout</NavigationItem> }

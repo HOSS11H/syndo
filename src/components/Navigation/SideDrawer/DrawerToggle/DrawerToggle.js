@@ -18,7 +18,8 @@ const HamburgerButton = styled.div`
 const HamburgerLine = styled.div`
     width: 80%;
     height: 2px;
-    background-color: white;
+    margin-bottom: 6px;
+    background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };;
 `
 
 const DrawerToggle = (props) => (

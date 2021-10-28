@@ -8,21 +8,21 @@ const LogoWrapper =styled(NavLink)`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
-    margin-bottom: 32px;
+    font-size: 36px;
     text-decoration: none;
+    margin-bottom: 20px
     @media (min-width: 768px) {
         height: 80%;
-        margin-bottom: 0px;
+        margin-bottom: 0px
     }
 `
 const LogoSpan =styled.span`
     color: ${ ( { theme} ) => theme.vars.primary };
 `
 
-const Logo = ( ) => {
+const Logo = ( props ) => {
     return (
-        <LogoWrapper to='/'> 
+        <LogoWrapper to='/' onClick={props.action}> 
             synd <LogoSpan>o</LogoSpan>
         </LogoWrapper>
     )

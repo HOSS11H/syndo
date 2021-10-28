@@ -7,7 +7,11 @@ import Logo from '../../Logo/Logo';
 
 const SideDrawerWrapper = styled.div`
     position: fixed;
-    width: 280px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    min-width: 280px;
     max-width: 70%;
     height: 100%;
     left: 0;
@@ -17,12 +21,36 @@ const SideDrawerWrapper = styled.div`
     padding: 32px 16px;
     box-sizing: border-box;
     transition: transform 0.3s ease-out;
+    text-align: center;
     @media (min-width: 768px) {
         display: none;
     }
     ${ ( { opened } ) => opened ?  'transform: translateX(0);' : 'transform: translateX(-100%);' }
 `
 
+const Button = styled.button`
+    font-size:14px;
+    font-weight: 700;
+    padding: 0 20px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.dark : theme.vars.white };;
+    border:0;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    margin: 0px auto;
+    &:hover {
+        color: ${ ( { theme } ) => theme.vars.primary };;
+    }
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+`
 
 const SideDrawer = ( props ) => {
     
@@ -35,10 +63,11 @@ const SideDrawer = ( props ) => {
         <React.Fragment>
             <Backdrop show={props.opened} remove={closeSideDrawer} />
             <SideDrawerWrapper opened={props.opened} >
-                <Logo /> 
+                <Logo action={closeSideDrawer} />
                 <nav onClick={closeSideDrawer}>
                     <NavigationItems isAuth={authCtx.isLoggedIn} />
                 </nav>
+                <Button onClick={closeSideDrawer}>Get started</Button>
             </SideDrawerWrapper>
 
         </React.Fragment>

@@ -7,17 +7,23 @@ const NavigationItemWrapper = styled.li`
     box-sizing: border-box;
     display: block;
     width: 100%;
-    @media (min-width: 500px) {
+    margin-bottom: 20px;
+    @media (min-width: 768px) {
         margin: 0;
         display: flex;
         height: 100%;
         width: auto;
         align-items: center;
+        margin-right: 40px;
+        margin-bottom: 0px;
+        &:last-child {
+            margin-right: 0px;
+        }
     }
 `
 
 const StyledLink = styled(NavLink)`
-    color: #145554;
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.dark };
     text-decoration: none;
     text-transform: capitalize;
     width: 100%;
@@ -27,19 +33,14 @@ const StyledLink = styled(NavLink)`
     align-items: center;
     justify-content: center;
     &:hover , &:active , &.active {
-        color: #40A4C8;
+        color: ${ ( { theme } ) => theme.vars.primary  };
     }
     @media screen and (min-width: 500px) {
         text-transform: capitalize;
-        color: white;
         height: 100%;
-        padding: 16px 10px;
-        border-bottom: 4px solid transparent;
         transition: 0.3s ease-in-out;
         &:hover , &:active , &.active {
-            background-color: #67a9af6b;
-            border-bottom: 4px solid #fff;
-            color: white;
+            color: ${ ( { theme } ) => theme.vars.primary  };
         }
     }
 `;
