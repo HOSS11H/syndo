@@ -9,7 +9,7 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider = props => {
 
-    const intialToken = localStorage.getItem('token');
+    const intialToken = localStorage.getItem('syndToken');
 
     const [ token , setToken ] = useState(intialToken);
 
@@ -17,12 +17,12 @@ export const AuthContextProvider = props => {
 
     const loginHandler = ( token ) => {
         setToken(token);
-        localStorage.setItem('token', token);
+        localStorage.setItem('syndToken', token);
     }
 
     const logoutHandler = ( ) => {
         setToken(null);
-        localStorage.removeItem('token')
+        localStorage.removeItem('syndToken')
     }
 
     const contextValue = {

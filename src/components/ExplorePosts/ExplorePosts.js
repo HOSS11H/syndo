@@ -111,7 +111,7 @@ const ExplorePosts = ( ) => {
     const loadedPosts = fetchedPosts.map( (post) => {
         return (
             <Grid item key={post.id} xs={12} sm={6} md={3}>
-                <Post id={ post.id } title={ post.title } img={post.img} endDate={post.endDate} desc={post.desc} progress={post.progress} infos={post.infos} tags={post.tags} />
+                <Post id={ post.id } title={ post.title } img={post.img} postClass={post.postClass} endDate={post.endDate} desc={post.desc} progress={post.progress} infos={post.infos} tags={post.tags} />
             </Grid>
         )
     })

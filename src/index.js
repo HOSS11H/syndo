@@ -4,15 +4,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeContextProvider } from './store/theme-context';
+import { AuthContextProvider } from './store/auth-context';
 import GlobalStyle from './styles/globalStyles';
 
 const app = (
   <React.StrictMode>
       <BrowserRouter>
-        <ThemeContextProvider>
-          <GlobalStyle />
-          <App />
-        </ThemeContextProvider >
+        <AuthContextProvider>
+          <ThemeContextProvider>
+            <GlobalStyle />
+            <App />
+          </ThemeContextProvider >
+        </AuthContextProvider>
       </BrowserRouter>
   </React.StrictMode>
 )

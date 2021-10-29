@@ -43,7 +43,7 @@ const AuthorName = styled.h3`
     font-weight: 400;
     text-transform: capitalize;
     margin-bottom: 2px;
-    color: ${ ( { theme } ) =>  theme.vars.white };
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
 `
 const AuthorTitle = styled.h3`
     font-size: 11px;

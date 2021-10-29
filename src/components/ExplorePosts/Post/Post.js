@@ -1,4 +1,8 @@
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import AuthContext from '../../../store/auth-context';
+import ThemeContext from '../../../store/theme-context';
 import LinearProgressWithLabel from '../../UI/LinearProgress/LinearProgress';
 
 
@@ -11,6 +15,15 @@ const PostWrapper = styled.div`
         max-width: 370px;
         margin: 0 auto 30px;
     }
+`
+const PostLink = styled.a`
+    position: absolute;
+    top: 0;
+    left:0;
+    right: 0;
+    width:100%;
+    height: 100%;
+    z-index:5;
 `
 const PostImageWrapper = styled.div`
     position: relative;
@@ -32,6 +45,9 @@ const PostClass= styled.span`
     width: 25px;
     height: 25px;
     border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform:capitalize;
     background-color: ${ ( { theme } ) =>  theme.vars.white };
     color: ${ ( { theme } ) =>  theme.vars.black };
 `
@@ -42,7 +58,7 @@ const PostContentWrapper = styled.div`
     border: 1px solid #eaeaea;
     border-top: 0;
     padding: 15px 12px 9px;
-    background-color: ${ ( { theme } ) => theme.vars.white};
+    background-color: ${ ( { theme } ) => theme.palette.common.white};
 `
 const PostContentHead = styled.div`
     display: flex;
@@ -117,17 +133,27 @@ const Tag = styled.span`
 
 const Post = ( props ) => {
 
+    const authCtx = useContext(AuthContext);
+    const themeCtx = useContext(ThemeContext);
+    const history = useHistory();
 
+    const onPostClickHandler= ( e ) => {
+        console.log('s');
+        authCtx.login(Math.random())
+        themeCtx.toggleMode();
+        history.push(`posts/${props.id}`);
+    }
 
     const loadedTags = props.tags.map( ( tag , index ) => {
         return <Tag key={index}>{tag}</Tag>
     })
-
+    console.log(props);
     return (
         <PostWrapper>
+            <PostLink onClick={onPostClickHandler.bind(null, props.id)} />
             <PostImageWrapper>
                 <PostImage src={ props.img}/>
-                <PostClass>{ props.postClass }</PostClass>
+                <PostClass>{props.postClass}</PostClass>
             </PostImageWrapper>
             <PostContentWrapper>
                 <PostContentHead>

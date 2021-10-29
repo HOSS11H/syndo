@@ -2,6 +2,7 @@ import { Redirect, Route , Switch} from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home';
+import SinglePost from './pages/SinglePost/SinglePost';
 
 
 const AppWrapper = styled.div`
@@ -13,6 +14,7 @@ function App() {
 
   const routes = (
       <Switch>
+        <Route path='/posts/:postId' component={SinglePost} />
         <Route path='/' component={Home} exact />
         <Redirect to='/' />
       </Switch>

@@ -1,9 +1,12 @@
+import { Fragment, useContext } from 'react';
+import AuthContext from '../../../store/auth-context';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import Logo from '../../Logo/Logo';
 import Container from '@mui/material/Container';
-import { NavLink } from 'react-router-dom';
+import UserModule from './UserModule/UserModule';
 
 const ContainerWrapper = styled.div`
     display: flex;
@@ -64,6 +67,8 @@ const Button = styled(NavLink)`
 
 const Toolbar = (props) => {
 
+    const authCtx = useContext(AuthContext);
+
     return (
     <Header>
         <Container maxWidth="lg">
@@ -71,10 +76,19 @@ const Toolbar = (props) => {
                 <Logo />
                 <DrawerToggle clicked={props.sideDrawerToggle} />
                 <NavWrapper>
-                    <Nav>
-                        <NavigationItems />
-                    </Nav>
-                    <Button to='/posts'>Get started</Button>
+                    {!authCtx.isLoggedIn && (
+                        <Fragment>
+                            <Nav>
+                                <NavigationItems />
+                            </Nav>
+                            <Button to='/posts'>Get started</Button>
+                        </Fragment>
+                    )}
+                    {
+                        authCtx.isLoggedIn && (
+                            <UserModule />
+                        )
+                    }
                 </NavWrapper>
             </ContainerWrapper>
         </Container>
