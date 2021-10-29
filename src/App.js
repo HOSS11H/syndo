@@ -1,4 +1,4 @@
-import { Route } from 'react-router';
+import { Redirect, Route , Switch} from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home';
@@ -12,7 +12,10 @@ const AppWrapper = styled.div`
 function App() {
 
   const routes = (
-      <Route path='/' component={Home} />
+      <Switch>
+        <Route path='/' component={Home} exact />
+        <Redirect to='/' />
+      </Switch>
     )
 
   return (

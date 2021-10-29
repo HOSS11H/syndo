@@ -110,7 +110,7 @@ const ExplorePosts = ( ) => {
 
     const loadedPosts = fetchedPosts.map( (post) => {
         return (
-            <Grid item key={post.id} sm={6} md={3}>
+            <Grid item key={post.id} xs={12} sm={6} md={3}>
                 <Post id={ post.id } title={ post.title } img={post.img} endDate={post.endDate} desc={post.desc} progress={post.progress} infos={post.infos} tags={post.tags} />
             </Grid>
         )
@@ -120,7 +120,7 @@ const ExplorePosts = ( ) => {
         <ExplorePostsWrapper>
             <Container maxWidth="lg">
                 <Grid container  >
-                    <Grid item  lg={4}>
+                    <Grid item xs={12}  lg={4}>
                         <HeadingWrapper>
                             <Heading margin='0px' >explore posts</Heading>
                             <NextButtonWrapper onClick={redirectUserHandler}>

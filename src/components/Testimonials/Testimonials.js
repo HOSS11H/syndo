@@ -63,14 +63,14 @@ const Testimonials = ( ) => {
         <TestimonialsWrapper>
             <Container maxWidth="lg">
                 <Grid container  >
-                    <Grid item  lg={4}>
+                    <Grid item xs={12}  lg={4}>
                         <Heading margin='42px' >hear it from our doers</Heading>
                     </Grid>
                 </Grid>
                 <Swiper
                     modules={[Autoplay]}
-                    spaceBetween={30}
-                    slidesPerView={3}
+                    spaceBetween={0}
+                    slidesPerView={1}
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                     autoplay={true}

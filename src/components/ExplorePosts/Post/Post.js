@@ -7,6 +7,10 @@ const PostWrapper = styled.div`
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 30px;
+    @media screen and (max-width: 900px) {
+        max-width: 370px;
+        margin: 0 auto 30px;
+    }
 `
 const PostImageWrapper = styled.div`
     position: relative;

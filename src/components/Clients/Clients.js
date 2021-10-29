@@ -78,8 +78,8 @@ const Clients = ( ) => {
                 <Swiper
                     ref={swiperRef}
                     modules={[Navigation]}
-                    spaceBetween={30}
-                    slidesPerView={4}
+                    spaceBetween={20}
+                    slidesPerView={2}
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                     autoplay={true}

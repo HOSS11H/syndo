@@ -14,6 +14,13 @@ const LogoWrapper =styled(NavLink)`
         height: 80%;
     }
 `
+const FooterLogoWrapper =styled(LogoWrapper)`
+    justify-content: flex-start;
+    margin-bottom: 14px;
+    @media screen and (max-width: 600px) {
+        justify-content: center;
+    }
+`
 const LogoSpan =styled.span`
     color: ${ ( { theme} ) => theme.vars.primary };
 `
@@ -25,4 +32,13 @@ const Logo = ( props ) => {
         </LogoWrapper>
     )
 }
+export const FooterLogo = ( props ) => {
+    return (
+        <FooterLogoWrapper to='/' onClick={props.action}> 
+            synd <LogoSpan>o</LogoSpan>
+        </FooterLogoWrapper>
+    )
+}
+
+
 export default Logo;
