@@ -181,8 +181,8 @@ const Post = ( props ) => {
                         </tr>
                         <tr>
                             <td>EGP{props.infos.invested}</td>
-                            <td>{props.infos.rate}</td>
-                            <td>{props.infos.tenor}</td>
+                            <td>{props.infos.investors}</td>
+                            <td>{props.infos.skin}</td>
                         </tr>
                     </tbody>
                 </PostInfos>
