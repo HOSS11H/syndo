@@ -2,6 +2,7 @@ import { useCallback, useState , Fragment } from "react";
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from "../Navigation/SideDrawer/SideDrawer";
 import styled from 'styled-components';
+import Footer from '../Footer/Footer';
 
 const Main = styled.main`
     overflow-x: hidden;
@@ -26,6 +27,7 @@ const Layout = props => {
                     authentication={props.isAuth} />
                 <Main>
                     {props.children}
+                    <Footer />
                 </Main>
             </Fragment>
     )

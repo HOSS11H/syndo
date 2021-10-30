@@ -4,7 +4,6 @@ import Hero from "../../components/Hero/Hero";
 import ExplorePosts from "../../components/ExplorePosts/ExplorePosts";
 import Testimonials from '../../components/Testimonials/Testimonials';
 import Clients from '../../components/Clients/Clients';
-import Footer from '../../components/Footer/Footer';
 
 const Home = props => {
     return (
@@ -13,7 +12,6 @@ const Home = props => {
             <ExplorePosts />
             <Testimonials />
             <Clients />
-            <Footer />
         </React.Fragment>
     )
 }
