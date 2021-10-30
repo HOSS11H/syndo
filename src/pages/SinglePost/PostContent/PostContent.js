@@ -16,6 +16,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 import TabPanel from '../../../components/UI/TabPanel/TabPanel';
+import PostModal from './PostModal/PostModal';
 
 const ContentWrapper = styled.div`
     margin-bottom: 10px;
@@ -288,10 +289,20 @@ const PostContent = ( props ) => {
 
     const [ currentTab , setCurrentTab ] = useState(1);
 
+    const [ modalOpened , setModalOpened ] = useState(false);
+
     const themeCtx = useContext(ThemeContext);
 
     const currentTabHandler = (event, newValue) => {
         setCurrentTab(newValue);
+    };
+
+    const openModalHandler = ( e ) => {
+        e.preventDefault();
+        setModalOpened(true);
+    };
+    const closeModalHandler = ( ) => {
+        setModalOpened(false);
     };
 
     const loadedTags = ['loan', 'industry'].map( ( tag , index ) => {
@@ -318,8 +329,9 @@ const PostContent = ( props ) => {
                         <LinkedInIcon sx={{ fontSize: 20 }} />
                     </PostSocialLink>
                 </PostSocials>
-                <InvestButton>invest now</InvestButton>
+                <InvestButton onClick={openModalHandler} >invest now</InvestButton>
             </PostHead>
+            <PostModal show={modalOpened} close={closeModalHandler} />
             <Tabs value={currentTab} onChange={currentTabHandler} aria-label="basic tabs example" 
                 sx= { { borderBottom: `1px solid ${themeCtx.theme.palette.mode === 'dark' ? themeCtx.theme.vars.white : themeCtx.theme.vars.black}`, 
                 '& .MuiTabs-indicator': { backgroundColor: `${themeCtx.theme.palette.mode === 'dark' ? themeCtx.theme.vars.white : themeCtx.theme.vars.black}` },  }  }>
