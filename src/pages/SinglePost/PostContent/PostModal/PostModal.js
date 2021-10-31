@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
@@ -39,7 +41,7 @@ const InvestForm = styled.div`
     width: 100%;
     min-height: 500px;
     max-width: 900px;
-    padding: 65px 65px 50px;
+    padding: 65px 0 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,21 +54,54 @@ const InvestForm = styled.div`
     @media screen and (max-width: 1100px) {
         max-width:80%;
         width: 80%;
-        padding-left: 40px;
-        padding-right: 40px;
     }
     @media screen and (max-width: 900px) {
         min-height: unset;
-        margin-top: 25vh;
-        margin-bottom: 25vh;
     }
     @media screen and (max-width: 500px) {
         min-height: unset;
-        padding-left: 25px;
-        padding-right: 25px;
-        width: 85%;
+        width: 90%;
+        padding: 50px 0;
     }
 `
+const ModalBody = styled.div`
+    max-height: 75vh;
+    overflow: scroll;
+    padding: 0 65px 0;
+    // Scroll //
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        height: 7px;
+        width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        margin-right: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 7px;
+        cursor: pointer;
+    }
+    @media screen and (max-width: 1100px) {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    @media screen and (max-width: 500px) {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+`
+const ModalClose = styled(IconButton)`
+    &.MuiButtonBase-root{
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
+        @media screen and (max-width: 600px) {
+            top: 20px;
+            right: 20px;
+        }
+    }
+`
+
 const FormHeading = styled.h3`
     font-size: 18px;
     font-weight: 700;
@@ -282,145 +317,150 @@ const PostModal = ( props ) => {
             >
             <Fade in={show} onExited={closeModal}>
                 <InvestForm>
-                    <Grid container>
-                        { ( activeStep === 0 || activeStep ===1 ) && (
-                            <>
-                                <Grid item md={2}>
-                                </Grid>
-                                <Grid item xs={12} md={5}>
-                                    <FormHeading>investment request</FormHeading>
-                                </Grid>
-                            </>
-                        )}
-                        { activeStep === 2 && (
-                            <>
-                                <Grid item md={4}>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <FormHeading>thank you</FormHeading>
-                                </Grid>
-                            </>
-                        )}
-                    </Grid>
+                    <ModalClose onClick={closeModal}>
+                        <CloseIcon />
+                    </ModalClose>
+                    <ModalBody>
+                        <Grid container>
+                            { ( activeStep === 0 || activeStep ===1 ) && (
+                                <>
+                                    <Grid item md={2}>
+                                    </Grid>
+                                    <Grid item xs={12} md={5}>
+                                        <FormHeading>investment request</FormHeading>
+                                    </Grid>
+                                </>
+                            )}
+                            { activeStep === 2 && (
+                                <>
+                                    <Grid item md={4}>
+                                    </Grid>
+                                    <Grid item xs={12} md={4}>
+                                        <FormHeading>thank you</FormHeading>
+                                    </Grid>
+                                </>
+                            )}
+                        </Grid>
 
-                    <Grid container>
-                        { ( activeStep === 0 || activeStep ===1 ) && (
-                            <>
-                                <Grid item xs={12} md={2}>
-                                    <CustomStepper activeStep={activeStep} orientation="vertical" >
-                                        {loadedSteps}
-                                    </CustomStepper>
-                                </Grid>
-                                <Grid item xs={12} md={5}>
-                                    <>
-                                        <TabPanel value={activeStep} index={0}>
-                                            <BlockInfo marginBottom={'14px'} labelMargin={'6px'}>
-                                                <h3>current avaiable balance</h3>
-                                                <p>{ (userInfos.balance / 1000).toFixed(3) } EGP</p>
-                                            </BlockInfo>
-                                            <BlockInfo marginBottom={'18px'} labelMargin={'4px'}>
-                                                <h3>amount (required)</h3>
-                                                <ModalSlider
-                                                    size="small"
-                                                    step={0.5}
-                                                    getAriaLabel={() => 'Minimum amount'}
-                                                    value={investmentValue}
-                                                    onChange={handleInvestmentSliderChange}
-                                                    valueLabelDisplay="off"
-                                                    disableSwap= {true}
-                                                />
-                                                <SliderRangeValues>
-                                                    <span>{ valueText(investmentValue[0]) }</span>
-                                                    <span>{ valueText(investmentValue[1]) }</span>
-                                                </SliderRangeValues>
-                                            </BlockInfo>
-                                            <BlockInfo marginBottom={'20px'} labelMargin={'10px'}>
-                                                <h3>expected ROI</h3>
-                                                <p>{ valueText(investmentValue[0] / 5 ) }</p>
-                                            </BlockInfo>
-                                            <BlockInfo marginBottom={'23px'} labelMargin={'10px'}>
-                                                <h3>risk disclaimer</h3>
-                                                <h4>Lorem Ipsum Dolor is the most dummy standard text ever Sit Amet Consectetur Da Ecperm Elit. Iure Adipisci Nihil Standard Dummy Text Ever Fugerspiciatis Collapsing 1500s.</h4>
-                                            </BlockInfo>
-                                            <ModalCheckBox error={agreedTermsError} checked={agreedTerms} handleChange={agreedTermsHandler}  label={
+                        <Grid container>
+                            { ( activeStep === 0 || activeStep ===1 ) && (
+                                <>
+                                    <Grid item xs={12} md={2}>
+                                        <CustomStepper activeStep={activeStep} orientation="vertical" >
+                                            {loadedSteps}
+                                        </CustomStepper>
+                                    </Grid>
+                                    <Grid item xs={12} md={5}>
+                                        <>
+                                            <TabPanel value={activeStep} index={0}>
+                                                <BlockInfo marginBottom={'14px'} labelMargin={'6px'}>
+                                                    <h3>current avaiable balance</h3>
+                                                    <p>{ (userInfos.balance / 1000).toFixed(3) } EGP</p>
+                                                </BlockInfo>
+                                                <BlockInfo marginBottom={'18px'} labelMargin={'4px'}>
+                                                    <h3>amount (required)</h3>
+                                                    <ModalSlider
+                                                        size="small"
+                                                        step={0.5}
+                                                        getAriaLabel={() => 'Minimum amount'}
+                                                        value={investmentValue}
+                                                        onChange={handleInvestmentSliderChange}
+                                                        valueLabelDisplay="off"
+                                                        disableSwap= {true}
+                                                    />
+                                                    <SliderRangeValues>
+                                                        <span>{ valueText(investmentValue[0]) }</span>
+                                                        <span>{ valueText(investmentValue[1]) }</span>
+                                                    </SliderRangeValues>
+                                                </BlockInfo>
+                                                <BlockInfo marginBottom={'20px'} labelMargin={'10px'}>
+                                                    <h3>expected ROI</h3>
+                                                    <p>{ valueText(investmentValue[0] / 5 ) }</p>
+                                                </BlockInfo>
+                                                <BlockInfo marginBottom={'23px'} labelMargin={'10px'}>
+                                                    <h3>risk disclaimer</h3>
+                                                    <h4>Lorem Ipsum Dolor is the most dummy standard text ever Sit Amet Consectetur Da Ecperm Elit. Iure Adipisci Nihil Standard Dummy Text Ever Fugerspiciatis Collapsing 1500s.</h4>
+                                                </BlockInfo>
+                                                <ModalCheckBox error={agreedTermsError} checked={agreedTerms} handleChange={agreedTermsHandler}  label={
+                                                        <>
+                                                            By clicking <b>Next</b> you agree to syndo's <b>terms</b>
+                                                        </>
+                                                    } />
+                                                <ModalActions>
+                                                    <ModalButton variant="text" onClick={closeModal}>cancel</ModalButton>
+                                                    <ModalButton variant='contained' onClick={handleNextStep} width='80px' >next</ModalButton>
+                                                </ModalActions>
+                                            </TabPanel>
+                                            <TabPanel value={activeStep} index={1}>
+                                                <BlockInfo marginBottom={'11px'} labelMargin={'6px'}>
+                                                    <h3>investment amount</h3>
+                                                    <p>{ valueText(investmentValue[0]  ) }</p>
+                                                </BlockInfo>
+                                                <BlockInfo marginBottom={'14px'}>
+                                                    <h4>Please enter your card details to secure your investment.Cash will only be deducted on campaign completion.</h4>
+                                                    <InputsWrapper>
+                                                        { UserData() }
+                                                        {userDataError && <ErrorMessage>Please Check Your data</ErrorMessage>}
+                                                    </InputsWrapper>
+                                                </BlockInfo>
+                                                <ModalCheckBox label={'Save card for future investments'} />
+                                                <ModalCheckBox error={agreedInvestmentError} checked={agreedInvestment} handleChange={agreedInvestmentHandler}  label={
                                                     <>
-                                                        By clicking <b>Next</b> you agree to syndo's <b>terms</b>
+                                                        By clicking <b>Invest</b> you agree to syndo's <b>terms</b>
                                                     </>
                                                 } />
-                                            <ModalActions>
-                                                <ModalButton variant="text" onClick={closeModal}>cancel</ModalButton>
-                                                <ModalButton variant='contained' onClick={handleNextStep} width='80px' >next</ModalButton>
-                                            </ModalActions>
-                                        </TabPanel>
-                                        <TabPanel value={activeStep} index={1}>
-                                            <BlockInfo marginBottom={'11px'} labelMargin={'6px'}>
-                                                <h3>investment amount</h3>
-                                                <p>{ valueText(investmentValue[0]  ) }</p>
-                                            </BlockInfo>
-                                            <BlockInfo marginBottom={'14px'}>
-                                                <h4>Please enter your card details to secure your investment.Cash will only be deducted on campaign completion.</h4>
-                                                <InputsWrapper>
-                                                    { UserData() }
-                                                    {userDataError && <ErrorMessage>Please Check Your data</ErrorMessage>}
-                                                </InputsWrapper>
-                                            </BlockInfo>
-                                            <ModalCheckBox label={'Save card for future investments'} />
-                                            <ModalCheckBox error={agreedInvestmentError} checked={agreedInvestment} handleChange={agreedInvestmentHandler}  label={
-                                                <>
-                                                    By clicking <b>Invest</b> you agree to syndo's <b>terms</b>
-                                                </>
-                                            } />
-                                            <ModalActions>
-                                                <ModalButton variant="text" onClick={handleStepBack}>back</ModalButton>
-                                                <ModalButton variant='contained' onClick={handleNextStep} width='100px' >invest { valueText(investmentValue[0]  ) }</ModalButton>
-                                            </ModalActions>
-                                        </TabPanel>
-                                    </>
-                                </Grid>
-                                <Grid item md={1}></Grid>
-                                <Grid xs={12} item md={4}>
-                                    <PostSummary postInfo={props.fetchedPost} />
-                                </Grid>
-                            </>
-                        )}
-                        { activeStep === 2 && (
+                                                <ModalActions>
+                                                    <ModalButton variant="text" onClick={handleStepBack}>back</ModalButton>
+                                                    <ModalButton variant='contained' onClick={handleNextStep} width='100px' >invest { valueText(investmentValue[0]  ) }</ModalButton>
+                                                </ModalActions>
+                                            </TabPanel>
+                                        </>
+                                    </Grid>
+                                    <Grid item md={1}></Grid>
+                                    <Grid xs={12} item md={4}>
+                                        <PostSummary postInfo={props.fetchedPost} />
+                                    </Grid>
+                                </>
+                            )}
+                            { activeStep === 2 && (
+                                <>
+                                    <Grid item md={4}>
+                                    </Grid>
+                                    <Grid item md={4}>
+                                        <BlockInfo labelMargin='6px' marginBottom='19px'>
+                                            <h4>your investment request is created successfully</h4>
+                                        </BlockInfo>
+                                        <BlockInfo labelMargin='6px' marginBottom='19px'>
+                                            <h3>investment ref</h3>
+                                            <p>{investRequestData.investmentRef}</p>
+                                        </BlockInfo>
+                                        <BlockInfo labelMargin='6px' marginBottom='19px'>
+                                            <h3>investment amount</h3>
+                                            <p>{ valueText(investmentValue[0]  ) }</p>
+                                        </BlockInfo>
+                                        <BlockInfo labelMargin='6px' marginBottom='19px'>
+                                            <h3>post</h3>
+                                            <p>{investRequestData.post}</p>
+                                        </BlockInfo>
+                                        <BlockInfo labelMargin='6px' marginBottom='19px'>
+                                            <h3>investments agreements</h3>
+                                            <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(investRequestData) ) } ` } download='agreement.json'>Download here</a>
+                                        </BlockInfo>
+                                        <Note>
+                                            <p>Investment amount will be deducted automatically on post completion, you can cancel your investment before completion from <a href="https:///">here</a></p>
+                                        </Note>
+                                    </Grid>
+                                </>
+                            )}
+                        </Grid>
+                        {activeStep === 2 && (
                             <>
-                                <Grid item md={4}>
-                                </Grid>
-                                <Grid item md={4}>
-                                    <BlockInfo labelMargin='6px' marginBottom='19px'>
-                                        <h4>your investment request is created successfully</h4>
-                                    </BlockInfo>
-                                    <BlockInfo labelMargin='6px' marginBottom='19px'>
-                                        <h3>investment ref</h3>
-                                        <p>{investRequestData.investmentRef}</p>
-                                    </BlockInfo>
-                                    <BlockInfo labelMargin='6px' marginBottom='19px'>
-                                        <h3>investment amount</h3>
-                                        <p>{ valueText(investmentValue[0]  ) }</p>
-                                    </BlockInfo>
-                                    <BlockInfo labelMargin='6px' marginBottom='19px'>
-                                        <h3>post</h3>
-                                        <p>{investRequestData.post}</p>
-                                    </BlockInfo>
-                                    <BlockInfo labelMargin='6px' marginBottom='19px'>
-                                        <h3>investments agreements</h3>
-                                        <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(investRequestData) ) } ` } download='agreement.json'>Download here</a>
-                                    </BlockInfo>
-                                    <Note>
-                                        <p>Investment amount will be deducted automatically on post completion, you can cancel your investment before completion from <a href="https:///">here</a></p>
-                                    </Note>
-                                </Grid>
+                                <ModalActions>
+                                    <ModalButton variant='contained' onClick={ResetCloseModalHandler} width='100px' >close</ModalButton>
+                                </ModalActions>
                             </>
                         )}
-                    </Grid>
-                    {activeStep === 2 && (
-                        <>
-                            <ModalActions>
-                                <ModalButton variant='contained' onClick={ResetCloseModalHandler} width='100px' >close</ModalButton>
-                            </ModalActions>
-                        </>
-                    )}
+                    </ModalBody>
                 </InvestForm>
             </Fade>
 
