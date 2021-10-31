@@ -1,7 +1,7 @@
 import React from 'react';
 import  styled  from 'styled-components';
 
-const BackdropWraooer = styled.div`
+const BackdropWrapper = styled.div`
     width: 100%;
     height: 100%;
     position: fixed;
@@ -15,6 +15,6 @@ const BackdropWraooer = styled.div`
 `
 
 const Backdrop = (props) => (
-    props.show ? <BackdropWraooer onClick={props.remove}></BackdropWraooer> : null
+    props.show ? <BackdropWrapper onClick={props.remove}></BackdropWrapper> : null
 );
 export default Backdrop;

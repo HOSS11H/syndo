@@ -105,6 +105,9 @@ const InvestButton = styled.button`
     border-radius: 22px;
     transition: 0.3s ease-in-out;
     text-transform: capitalize;
+    &:disabled {
+        opacity: 0.5;
+    }
 `
 const TabContent = styled.div`
     padding-top: 26px;
@@ -329,9 +332,9 @@ const PostContent = ( props ) => {
                         <LinkedInIcon sx={{ fontSize: 20 }} />
                     </PostSocialLink>
                 </PostSocials>
-                <InvestButton onClick={openModalHandler} >invest now</InvestButton>
+                <InvestButton onClick={openModalHandler} disabled={modalOpened} >invest now</InvestButton>
             </PostHead>
-            <PostModal show={modalOpened} close={closeModalHandler} />
+            <PostModal show={modalOpened} closeModal={closeModalHandler} />
             <Tabs value={currentTab} onChange={currentTabHandler} aria-label="basic tabs example" 
                 sx= { { borderBottom: `1px solid ${themeCtx.theme.palette.mode === 'dark' ? themeCtx.theme.vars.white : themeCtx.theme.vars.black}`, 
                 '& .MuiTabs-indicator': { backgroundColor: `${themeCtx.theme.palette.mode === 'dark' ? themeCtx.theme.vars.white : themeCtx.theme.vars.black}` },  }  }>

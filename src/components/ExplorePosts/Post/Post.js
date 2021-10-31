@@ -23,6 +23,7 @@ const PostLink = styled.a`
     right: 0;
     width:100%;
     height: 100%;
+    cursor: pointer;
     z-index:5;
 `
 const PostImageWrapper = styled.div`
