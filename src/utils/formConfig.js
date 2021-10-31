@@ -1,10 +1,8 @@
-import Input from '../components/UI/Input/Input';
+import ModalInput from '../components/UI/Input/Input';
 import {
     requiredRule,
-    minLengthRule,
-    maxLengthRule,
-    passwordMatchRule,
-    isEmailRule,
+    requiredLengthRule,
+    isNumberRule,
 } from './inputValidationRules';
 /**
  * creates and returns object representation of form field
@@ -17,15 +15,16 @@ import {
  * @param {boolean} valid - default value for the input (we set them intially for rhe select Inputs)
  * @param {boolean} touched - default value for the input (we set them intially for rhe select Inputs)
  */
-function createFormFieldConfig(label, name, type, defaultValue = '', options = null , valid= false , touched = false) {
+function createFormFieldConfig(label, name, type, placeholder, defaultValue = '', options = null , valid= false , touched = false) {
     return {
         renderInput: (handleChange, value, isValid, error, key) => {
             return (
-                <Input
+                <ModalInput
                     key={key}
                     name={name}
                     type={type}
                     label={label}
+                    placeholder={placeholder}
                     isValid={isValid}
                     value={value}
                     handleChange={handleChange}
@@ -42,122 +41,32 @@ function createFormFieldConfig(label, name, type, defaultValue = '', options = n
     };
 }
 
-// object representation of address form
-export const addressForm = {
-    address: {
-        ...createFormFieldConfig('Street address', 'address', 'text'),
-        validationRules: [
-            requiredRule('Street address'),
-            minLengthRule('address', 8),
-        ],
-    },
-    city: {
-        ...createFormFieldConfig('city', 'city', 'text'),
-        validationRules: [
-            requiredRule('city'),
-        ],
-    },
-    state: {
-        ...createFormFieldConfig('state', 'state', 'select', 'new-york',
-            [
-                {
-                    value: 'new-york',
-                    label: 'New york',
-                } , 
-                {
-                    value: 'london',
-                    label: 'London',
-                } , 
-                {
-                    value: 'madrid',
-                    label: 'Madrid',
-                } , 
-                {
-                    value: 'paris',
-                    label: 'Paris',
-                } , 
-            ] ,
-            true,
-            true
-        ),
-        validationRules: [
-            requiredRule('state'),
-        ],
-    },
-    zipCode: {
-        ...createFormFieldConfig('zipCode', 'zipCode', 'text'),
-        validationRules: [
-            requiredRule('zipCode'),
-            maxLengthRule('zipCode', 5),
-        ],
-    },
-};
-// object representation of payment form
-export const paymentForm = {
-    payment: {
-        ...createFormFieldConfig('payment', 'payment', 'select', 'cash',
-            [
-                {
-                    value: 'cash',
-                    label: 'cash',
-                } , 
-                {
-                    value: 'visa',
-                    label: 'visa',
-                } , 
-            ] ,
-            true,
-            true
-        ),
-        validationRules: [
-            requiredRule('payment method'),
-        ],
-    },
+// object representation of investment form
+export const investmentForm = {
     name: {
-        ...createFormFieldConfig('Name', 'name', 'text'),
+        ...createFormFieldConfig('Cardholder name', 'name', 'text', 'john doe'),
         validationRules: [
             requiredRule('Name'),
         ],
     },
+    cardNumber: {
+        ...createFormFieldConfig('Card number', 'cardNumber', 'password', '**** **** **** ****'), 
+        validationRules: [
+            requiredRule('Card number'),
+        ],
+    },
+    expiryDate: {
+        ...createFormFieldConfig('Expiry date', 'expiryDate', 'date', '12/23'), 
+        validationRules: [
+            requiredRule('Expiry date'),
+        ],
+    },
+    cvv: {
+        ...createFormFieldConfig('CVV', 'cvv', 'text', '***'), 
+        validationRules: [
+            requiredRule('cvv'),
+            requiredLengthRule('cvv', 3),
+            isNumberRule('cvv'),
+        ],
+    },
 };
-// object representation of Login form
-export const loginForm = {
-    email : {
-        ...createFormFieldConfig('Email', 'email', 'text'),
-        validationRules: [
-            requiredRule('email'),
-            isEmailRule('email'),
-        ],
-    },
-    password : {
-        ...createFormFieldConfig('Password', 'password', 'password'),
-        validationRules : [
-            requiredRule('password'),
-        ]
-    }
-}
-// object representation of Signup form
-export const signupForm = {
-    email : {
-        ...createFormFieldConfig('Email', 'email', 'text'),
-        validationRules: [
-            requiredRule('email'),
-            minLengthRule('email', 4),
-            isEmailRule('email'),
-        ],
-    },
-    password : {
-        ...createFormFieldConfig('Password', 'password', 'password'),
-        validationRules : [
-            requiredRule('password'),
-            minLengthRule('password', 4),
-            maxLengthRule('password', 8),
-        ]
-    } ,
-    confirmPassword : {
-        ...createFormFieldConfig('Enter Password Again', 'confirmPassword', 'password'),
-        validationRules : [
-            passwordMatchRule(),
-        ]
-    }
-}

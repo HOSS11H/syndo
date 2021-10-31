@@ -48,6 +48,23 @@ export function maxLengthRule(inputName, maxCharacters) {
         (inputValue, formObj) => inputValue.trim().length <= maxCharacters
     );
 }
+export function requiredLengthRule(inputName, requiredCharacters) {
+    return createValidationRule(
+        'requiredLength',
+        `${inputName} must be ${requiredCharacters} characters`,
+        (inputValue, formObj) => inputValue.trim().length === requiredCharacters
+    );
+}
+export function isNumberRule(inputName) {
+    return createValidationRule(
+        'isNumber',
+        `${inputName} must be a number`,
+        (inputValue, formObj) => {
+            console.log('w');
+            return !isNaN(inputValue)
+        }    
+    );
+}
 
 export function passwordMatchRule() {
     return createValidationRule(

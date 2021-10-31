@@ -13,6 +13,10 @@ import ModalSlider from '../../../../components/UI/Slider/Slider';
 import ModalCheckBox from '../../../../components/UI/Checkbox/Checkbox';
 import ModalButton from '../../../../components/UI/Button/Button';
 
+
+import useForm from '../../../../hooks/useForm';
+import { investmentForm } from '../../../../utils/formConfig';
+
 const ModalBackdrop = styled(Backdrop)`
     &.MuiBackdrop-root {
         background-color: transparent;
@@ -64,12 +68,15 @@ const BlockInfo = styled.div`
     }
     h4 {
         font-size: 11px;
-        font-weight: 500;
+        font-weight: 600;
         color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
         transition: 0.3s ease-in-out;
         text-transform: capitalize;
         margin-bottom: 0;
     }
+`
+const InputsWrapper= styled.div`
+    margin-top: 10px;
 `
 const SliderRangeValues = styled.div`
     display: flex;
@@ -127,6 +134,9 @@ function valueText(value) {
 const PostModal = ( props ) => {
 
     const { show, closeModal } = props;
+
+    const { renderFormInputs: UserData , isFormValid: isUserDataValid , form: investFormData} = useForm(investmentForm);
+
 
     const [ activeStep , setActiveStep ] = useState(0);
 
@@ -239,9 +249,15 @@ const PostModal = ( props ) => {
                                 { agreedTermsError && ( <ModalError>please Check this</ModalError>) }
                             </TabPanel>
                             <TabPanel value={activeStep} index={1}>
-                                <BlockInfo marginBottom={'14px'} labelMargin={'6px'}>
+                                <BlockInfo marginBottom={'11px'} labelMargin={'6px'}>
                                     <h3>investment amount</h3>
                                     <p>{ valueText(investmentValue[0]  ) }</p>
+                                </BlockInfo>
+                                <BlockInfo marginBottom={'14px'}>
+                                    <h4>Please enter your card details to secure your investment.Cash will only be deducted on campaign completion.</h4>
+                                    <InputsWrapper>
+                                        { UserData() }
+                                    </InputsWrapper>
                                 </BlockInfo>
                                 
                             </TabPanel>
