@@ -130,25 +130,18 @@ const Tag = styled.span`
     }
 `
 
-
-
 const Post = ( props ) => {
 
-    const authCtx = useContext(AuthContext);
-    const themeCtx = useContext(ThemeContext);
     const history = useHistory();
 
     const onPostClickHandler= ( e ) => {
-        console.log('s');
-        authCtx.login(Math.random())
-        themeCtx.toggleMode();
-        history.replace(`posts/${props.id}`);
+        history.push(`/posts/${props.id}`);
     }
 
     const loadedTags = props.tags.map( ( tag , index ) => {
         return <Tag key={index}>{tag}</Tag>
     })
-    console.log(props);
+
     return (
         <PostWrapper>
             <PostLink onClick={onPostClickHandler.bind(null, props.id)} />

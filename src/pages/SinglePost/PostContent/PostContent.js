@@ -450,7 +450,7 @@ const PostContent = ( props ) => {
                         <Grid container spacing={4} >
                             { fetchedPost.clients.map( (item, index) => {
                                 return (
-                                    <Grid key={index} item xs={6} sm={4} >
+                                    <Grid key={index} item xs={index === ( fetchedPost.team.length - 1 ) ? 12 : 6 } sm={4} >
                                         <Card>
                                             <CardImg src={item.src} />
                                             <h5>client {item.num}</h5>
@@ -465,7 +465,7 @@ const PostContent = ( props ) => {
                         <Grid container spacing={4} >
                             { fetchedPost.team.map( (item, index) => {
                                 return (
-                                    <Grid key={index} item xs={6} sm={4} >
+                                    <Grid key={index} item xs={index === ( fetchedPost.team.length - 1 ) ? 12 : 6 } sm={4} >
                                         <Card>
                                             <CardImg src={item.src} />
                                             <h5>{item.name}</h5>

@@ -20,10 +20,10 @@ export const PostsContextProvider = ( props ) => {
             desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
             progress: 60,
             infos: {
-                goal: '1,000,000',
+                goal: 1000000,
                 rate: '12%',
                 tenor: '12 months',
-                invested: '500,000',
+                invested: 500000,
                 investors: '5',
                 skin: '5%'
             },
@@ -54,12 +54,12 @@ export const PostsContextProvider = ( props ) => {
             desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
             progress: 60,
             infos: {
-                goal: '1,000,000',
+                goal: 1000000,
                 rate: '12%',
                 tenor: '2 months',
-                invested: '400,000',
+                invested:400000,
                 investors: '5',
-                skin: '5%'
+                skin: '7%'
             },
             tags: ['loan', 'industry'],
             about: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil standard dummy text ever fugerspiciatis collapsing 1500s.',
@@ -88,10 +88,10 @@ export const PostsContextProvider = ( props ) => {
             desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
             progress: 60,
             infos: {
-                goal: '1,000,000',
+                goal: 1000000,
                 rate: '12%',
                 tenor: '12 months',
-                invested: '500,000',
+                invested: 500000,
                 investors: '5',
                 skin: '5%'
             },
@@ -122,12 +122,12 @@ export const PostsContextProvider = ( props ) => {
             desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
             progress: 60,
             infos: {
-                goal: '1,000,000',
+                goal: 1000000,
                 rate: '12%',
                 tenor: '2 months',
-                invested: '400,000',
+                invested:400000,
                 investors: '5',
-                skin: '5%'
+                skin: '7%'
             },
             tags: ['loan', 'industry'],
             about: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil standard dummy text ever fugerspiciatis collapsing 1500s.',

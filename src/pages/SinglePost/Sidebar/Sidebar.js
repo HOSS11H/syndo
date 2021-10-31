@@ -53,7 +53,7 @@ const Sidebar = props => {
     if ( props.postIndex < ( postsCtx.posts.length - 1 ) ) {
         nextPostIndex = props.postIndex + 1
     } else {
-        nextPostIndex = props.postIndex + 1
+        nextPostIndex = props.postIndex - 1
     }
 
     const loadedPost = postsCtx.posts[nextPostIndex]

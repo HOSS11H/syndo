@@ -195,11 +195,10 @@ const PostModal = ( props ) => {
             name: userDataValues.name.value,
             cardNum: userDataValues.cardNumber.value,
             investmentRef: `#${Math.random().toString().slice(2, -1)}`,
-            post: 'post title',
+            post: props.fetchedPost.title,
         }
         setInvestRequestData(userData)
     }
-    console.log(userDataValues);
 
     const handleNextStep = () => {
         if ( activeStep === 0 ) {
@@ -273,7 +272,7 @@ const PostModal = ( props ) => {
                                 <Grid item md={4}>
                                 </Grid>
                                 <Grid item md={4}>
-                                    <FormHeading>investment request</FormHeading>
+                                    <FormHeading>thank you</FormHeading>
                                 </Grid>
                             </>
                         )}
@@ -288,66 +287,66 @@ const PostModal = ( props ) => {
                                         </CustomStepper>
                                 </Grid>
                                 <Grid item md={5}>
-                                        <>
-                                            <TabPanel value={activeStep} index={0}>
-                                                <BlockInfo marginBottom={'14px'} labelMargin={'6px'}>
-                                                    <h3>current avaiable balance</h3>
-                                                    <p>{ (userInfos.balance / 1000).toFixed(3) } EGP</p>
-                                                </BlockInfo>
-                                                <BlockInfo marginBottom={'18px'} labelMargin={'4px'}>
-                                                    <h3>amount (required)</h3>
-                                                    <ModalSlider
-                                                        size="small"
-                                                        step={0.5}
-                                                        getAriaLabel={() => 'Minimum amount'}
-                                                        value={investmentValue}
-                                                        onChange={handleInvestmentSliderChange}
-                                                        valueLabelDisplay="off"
-                                                        disableSwap= {true}
-                                                    />
-                                                    <SliderRangeValues>
-                                                        <span>{ valueText(investmentValue[0]) }</span>
-                                                        <span>{ valueText(investmentValue[1]) }</span>
-                                                    </SliderRangeValues>
-                                                </BlockInfo>
-                                                <BlockInfo marginBottom={'20px'} labelMargin={'10px'}>
-                                                    <h3>expected ROI</h3>
-                                                    <p>{ valueText(investmentValue[0] / 5 ) }</p>
-                                                </BlockInfo>
-                                                <BlockInfo marginBottom={'23px'} labelMargin={'10px'}>
-                                                    <h3>risk disclaimer</h3>
-                                                    <h4>Lorem Ipsum Dolor is the most dummy standard text ever Sit Amet Consectetur Da Ecperm Elit. Iure Adipisci Nihil Standard Dummy Text Ever Fugerspiciatis Collapsing 1500s.</h4>
-                                                </BlockInfo>
-                                                <ModalCheckBox error={agreedTermsError} checked={agreedTerms} handleChange={agreedTermsHandler}  label={
-                                                    <>
-                                                        By clicking <b>Next</b> you agree to syndo's <b>terms</b>
-                                                    </>
-                                                } />
-                                            </TabPanel>
-                                            <TabPanel value={activeStep} index={1}>
-                                                <BlockInfo marginBottom={'11px'} labelMargin={'6px'}>
-                                                    <h3>investment amount</h3>
-                                                    <p>{ valueText(investmentValue[0]  ) }</p>
-                                                </BlockInfo>
-                                                <BlockInfo marginBottom={'14px'}>
-                                                    <h4>Please enter your card details to secure your investment.Cash will only be deducted on campaign completion.</h4>
-                                                    <InputsWrapper>
-                                                        { UserData() }
-                                                        {userDataError && <ErrorMessage>Please Check Your data</ErrorMessage>}
-                                                    </InputsWrapper>
-                                                </BlockInfo>
-                                                <ModalCheckBox label={'Save card for future investments'} />
-                                                <ModalCheckBox error={agreedInvestmentError} checked={agreedInvestment} handleChange={agreedInvestmentHandler}  label={
-                                                    <>
-                                                        By clicking <b>Invest</b> you agree to syndo's <b>terms</b>
-                                                    </>
-                                                } />
-                                            </TabPanel>
-                                        </>
+                                    <>
+                                        <TabPanel value={activeStep} index={0}>
+                                            <BlockInfo marginBottom={'14px'} labelMargin={'6px'}>
+                                                <h3>current avaiable balance</h3>
+                                                <p>{ (userInfos.balance / 1000).toFixed(3) } EGP</p>
+                                            </BlockInfo>
+                                            <BlockInfo marginBottom={'18px'} labelMargin={'4px'}>
+                                                <h3>amount (required)</h3>
+                                                <ModalSlider
+                                                    size="small"
+                                                    step={0.5}
+                                                    getAriaLabel={() => 'Minimum amount'}
+                                                    value={investmentValue}
+                                                    onChange={handleInvestmentSliderChange}
+                                                    valueLabelDisplay="off"
+                                                    disableSwap= {true}
+                                                />
+                                                <SliderRangeValues>
+                                                    <span>{ valueText(investmentValue[0]) }</span>
+                                                    <span>{ valueText(investmentValue[1]) }</span>
+                                                </SliderRangeValues>
+                                            </BlockInfo>
+                                            <BlockInfo marginBottom={'20px'} labelMargin={'10px'}>
+                                                <h3>expected ROI</h3>
+                                                <p>{ valueText(investmentValue[0] / 5 ) }</p>
+                                            </BlockInfo>
+                                            <BlockInfo marginBottom={'23px'} labelMargin={'10px'}>
+                                                <h3>risk disclaimer</h3>
+                                                <h4>Lorem Ipsum Dolor is the most dummy standard text ever Sit Amet Consectetur Da Ecperm Elit. Iure Adipisci Nihil Standard Dummy Text Ever Fugerspiciatis Collapsing 1500s.</h4>
+                                            </BlockInfo>
+                                            <ModalCheckBox error={agreedTermsError} checked={agreedTerms} handleChange={agreedTermsHandler}  label={
+                                                <>
+                                                    By clicking <b>Next</b> you agree to syndo's <b>terms</b>
+                                                </>
+                                            } />
+                                        </TabPanel>
+                                        <TabPanel value={activeStep} index={1}>
+                                            <BlockInfo marginBottom={'11px'} labelMargin={'6px'}>
+                                                <h3>investment amount</h3>
+                                                <p>{ valueText(investmentValue[0]  ) }</p>
+                                            </BlockInfo>
+                                            <BlockInfo marginBottom={'14px'}>
+                                                <h4>Please enter your card details to secure your investment.Cash will only be deducted on campaign completion.</h4>
+                                                <InputsWrapper>
+                                                    { UserData() }
+                                                    {userDataError && <ErrorMessage>Please Check Your data</ErrorMessage>}
+                                                </InputsWrapper>
+                                            </BlockInfo>
+                                            <ModalCheckBox label={'Save card for future investments'} />
+                                            <ModalCheckBox error={agreedInvestmentError} checked={agreedInvestment} handleChange={agreedInvestmentHandler}  label={
+                                                <>
+                                                    By clicking <b>Invest</b> you agree to syndo's <b>terms</b>
+                                                </>
+                                            } />
+                                        </TabPanel>
+                                    </>
                                 </Grid>
                                 <Grid item md={1}></Grid>
                                 <Grid item md={4}>
-                                        <PostSummary />
+                                    <PostSummary postInfo={props.fetchedPost} />
                                 </Grid>
                             </>
                         )}

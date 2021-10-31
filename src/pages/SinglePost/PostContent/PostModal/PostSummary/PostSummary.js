@@ -36,29 +36,33 @@ const PostContent = styled.div`
         color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
         transition: 0.3s ease-in-out;
         margin-bottom: 0px;
+        text-transform: capitalize;
     }
 `
 
 
 const PostSummary = (props) => {
+
+    const { postInfo } = props;
+
     return (
         <PostWrapper>
             <h3>Post summary</h3>
             <PostContent>
                 <h4>Post</h4>
-                <p>post title</p>
+                <p>{postInfo.title}</p>
             </PostContent>
             <PostContent>
                 <h4>Tenor</h4>
-                <p>2 months</p>
+                <p>{postInfo.infos.tenor}</p>
             </PostContent>
             <PostContent>
                 <h4>Total raised</h4>
-                <p>50.000 EGP (40%) of 250.000 EGP</p>
+                <p>{postInfo.infos.invested} EGP ({ ( postInfo.infos.invested /  postInfo.infos.goal ) * 100 }%) of {postInfo.infos.goal} EGP</p>
             </PostContent>
             <PostContent>
                 <h4>Expected Net ROI</h4>
-                <p>2%</p>
+                <p>{postInfo.infos.skin}</p>
             </PostContent>
         </PostWrapper>
     )
