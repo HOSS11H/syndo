@@ -1,4 +1,7 @@
 import { Fragment, useContext } from 'react';
+import IconButton from '@mui/material/IconButton';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import Brightness2Icon from '@mui/icons-material/Brightness2';
 import AuthContext from '../../../store/auth-context';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,8 +10,14 @@ import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import Logo from '../../Logo/Logo';
 import Container from '@mui/material/Container';
 import UserModule from './UserModule/UserModule';
+import ThemeContext from '../../../store/theme-context';
 
 const ContainerWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+const ModuleWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,27 +78,35 @@ const Toolbar = (props) => {
 
     const authCtx = useContext(AuthContext);
 
+    const themeCtx = useContext(ThemeContext)
+
+
     return (
     <Header>
         <Container maxWidth="lg">
             <ContainerWrapper>
                 <Logo />
-                <DrawerToggle clicked={props.sideDrawerToggle} />
-                <NavWrapper>
-                    {!authCtx.isLoggedIn && (
-                        <Fragment>
-                            <Nav>
-                                <NavigationItems />
-                            </Nav>
-                            <Button to='/posts'>Get started</Button>
-                        </Fragment>
-                    )}
-                    {
-                        authCtx.isLoggedIn && (
-                            <UserModule />
-                        )
-                    }
-                </NavWrapper>
+                <ModuleWrapper>
+                    <DrawerToggle clicked={props.sideDrawerToggle} />
+                    <NavWrapper>
+                        {!authCtx.isLoggedIn && (
+                            <Fragment>
+                                <Nav>
+                                    <NavigationItems />
+                                </Nav>
+                                <Button to='/posts'>Get started</Button>
+                            </Fragment>
+                        )}
+                        {
+                            authCtx.isLoggedIn && (
+                                <UserModule />
+                            )
+                        }
+                    </NavWrapper>
+                    <IconButton sx={{ ml: 1, color: themeCtx.theme.palette.mode === 'dark' ?  themeCtx.theme.vars.white : themeCtx.theme.vars.black }} onClick={themeCtx.toggleMode} >
+                        {themeCtx.theme.palette.mode === 'dark' ? <Brightness2Icon /> : <WbSunnyIcon />}
+                    </IconButton>
+                </ModuleWrapper>
             </ContainerWrapper>
         </Container>
     </Header>

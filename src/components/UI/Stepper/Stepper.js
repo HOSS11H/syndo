@@ -4,10 +4,36 @@ import Stepper from '@mui/material/Stepper';
 import StepLabel from '@mui/material/StepLabel';
 
 const ModalStepper = styled(Stepper)`
+    &.MuiStepper-root {
+        @media screen and (max-width: 899.98px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            max-width: 70%;
+            margin: 0 auto 40px;
+        }
+    }
+    & .MuiStep-root {
+        @media screen and (max-width: 899.98px) {
+            padding-left: 8px;;
+            padding-right: 8px;;
+        }
+    }
     & .MuiStepConnector-root {
         margin-left: 8px;
+        @media screen and (max-width: 899.98px) {
+            margin-left: 0px;
+            flex: 1 1 auto;
+        }
         & .MuiStepConnector-line {
             border-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
+            @media screen and (max-width: 899.98px) {
+                display: block;
+                border-top-style: solid;
+                border-top-width: 1px;
+                min-height: unset;
+            }
         }
     }
 `
@@ -40,6 +66,9 @@ const ModalStepLabel = styled(StepLabel)`
         &.Mui-active {
             color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
             font-weight: 700;
+        }
+        &.Mui-completed {
+            color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
         }
     }
 `

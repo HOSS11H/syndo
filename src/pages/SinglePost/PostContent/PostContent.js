@@ -2,9 +2,6 @@ import { useState , useContext} from 'react';
 import ThemeContext from '../../../store/theme-context';
 
 import styled from 'styled-components';
-
-import Client from '../../../images/clients/client.jpg';
-
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -109,6 +106,7 @@ const InvestButton = styled.button`
 `
 const TabContent = styled.div`
     padding-top: 26px;
+    color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.white : theme.vars.black };
 `
 
 const BlockInfo = styled.div`

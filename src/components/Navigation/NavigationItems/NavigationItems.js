@@ -24,12 +24,18 @@ const NavigationItems = ( props ) => {
 
     const authCtx = useContext(AuthContext);
     
+    const userLoginHandler = ( e ) => {
+        e.preventDefault();
+        console.log('f')
+        authCtx.login(Math.random())
+    }
+    
     return (
         <NavigationItemsWrapper >
             <NavigationItem link='/posts' exact>posts</NavigationItem>
             <NavigationItem link='/testimonials' exact>testimonials</NavigationItem>
             {!authCtx.isLoggedIn
-            ? <NavigationItem link='/auth' >login</NavigationItem>
+            ? <NavigationItem link='/auth' clicked={userLoginHandler} >login</NavigationItem>
             : <NavigationItem link='/logout' >logout</NavigationItem> }
         </NavigationItemsWrapper>
     )

@@ -18,6 +18,14 @@ import useForm from '../../../../hooks/useForm';
 import { investmentForm } from '../../../../utils/formConfig';
 import PostSummary from './PostSummary/PostSummary';
 
+const CustomModal = styled(Modal)`
+    &.MuiModal-root {
+        @media screen and (max-width: 900px) {
+            overflow: scroll;
+        }
+    }
+`
+
 const ModalBackdrop = styled(Backdrop)`
     &.MuiBackdrop-root {
         background-color: transparent;
@@ -41,6 +49,23 @@ const InvestForm = styled.div`
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 10px;
     z-index: 5;
+    @media screen and (max-width: 1100px) {
+        max-width:80%;
+        width: 80%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    @media screen and (max-width: 900px) {
+        min-height: unset;
+        margin-top: 25vh;
+        margin-bottom: 25vh;
+    }
+    @media screen and (max-width: 500px) {
+        min-height: unset;
+        padding-left: 25px;
+        padding-right: 25px;
+        width: 85%;
+    }
 `
 const FormHeading = styled.h3`
     font-size: 18px;
@@ -247,7 +272,7 @@ const PostModal = ( props ) => {
 
 
     return (
-        <Modal open={show} onClose={closeModal} 
+        <CustomModal open={show} onClose={closeModal} 
             aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description"
             closeAfterTransition
             BackdropComponent={ModalBackdrop}
@@ -262,7 +287,7 @@ const PostModal = ( props ) => {
                             <>
                                 <Grid item md={2}>
                                 </Grid>
-                                <Grid item md={5}>
+                                <Grid item xs={12} md={5}>
                                     <FormHeading>investment request</FormHeading>
                                 </Grid>
                             </>
@@ -271,7 +296,7 @@ const PostModal = ( props ) => {
                             <>
                                 <Grid item md={4}>
                                 </Grid>
-                                <Grid item md={4}>
+                                <Grid item xs={12} md={4}>
                                     <FormHeading>thank you</FormHeading>
                                 </Grid>
                             </>
@@ -281,12 +306,12 @@ const PostModal = ( props ) => {
                     <Grid container>
                         { ( activeStep === 0 || activeStep ===1 ) && (
                             <>
-                                <Grid item md={2}>
-                                        <CustomStepper activeStep={activeStep} orientation="vertical" >
-                                            {loadedSteps}
-                                        </CustomStepper>
+                                <Grid item xs={12} md={2}>
+                                    <CustomStepper activeStep={activeStep} orientation="vertical" >
+                                        {loadedSteps}
+                                    </CustomStepper>
                                 </Grid>
-                                <Grid item md={5}>
+                                <Grid item xs={12} md={5}>
                                     <>
                                         <TabPanel value={activeStep} index={0}>
                                             <BlockInfo marginBottom={'14px'} labelMargin={'6px'}>
@@ -318,10 +343,14 @@ const PostModal = ( props ) => {
                                                 <h4>Lorem Ipsum Dolor is the most dummy standard text ever Sit Amet Consectetur Da Ecperm Elit. Iure Adipisci Nihil Standard Dummy Text Ever Fugerspiciatis Collapsing 1500s.</h4>
                                             </BlockInfo>
                                             <ModalCheckBox error={agreedTermsError} checked={agreedTerms} handleChange={agreedTermsHandler}  label={
-                                                <>
-                                                    By clicking <b>Next</b> you agree to syndo's <b>terms</b>
-                                                </>
-                                            } />
+                                                    <>
+                                                        By clicking <b>Next</b> you agree to syndo's <b>terms</b>
+                                                    </>
+                                                } />
+                                            <ModalActions>
+                                                <ModalButton variant="text" onClick={closeModal}>cancel</ModalButton>
+                                                <ModalButton variant='contained' onClick={handleNextStep} width='80px' >next</ModalButton>
+                                            </ModalActions>
                                         </TabPanel>
                                         <TabPanel value={activeStep} index={1}>
                                             <BlockInfo marginBottom={'11px'} labelMargin={'6px'}>
@@ -341,11 +370,15 @@ const PostModal = ( props ) => {
                                                     By clicking <b>Invest</b> you agree to syndo's <b>terms</b>
                                                 </>
                                             } />
+                                            <ModalActions>
+                                                <ModalButton variant="text" onClick={handleStepBack}>back</ModalButton>
+                                                <ModalButton variant='contained' onClick={handleNextStep} width='100px' >invest { valueText(investmentValue[0]  ) }</ModalButton>
+                                            </ModalActions>
                                         </TabPanel>
                                     </>
                                 </Grid>
                                 <Grid item md={1}></Grid>
-                                <Grid item md={4}>
+                                <Grid xs={12} item md={4}>
                                     <PostSummary postInfo={props.fetchedPost} />
                                 </Grid>
                             </>
@@ -381,22 +414,6 @@ const PostModal = ( props ) => {
                             </>
                         )}
                     </Grid>
-                    {activeStep === 0 && (
-                        <>
-                            <ModalActions>
-                                <ModalButton variant="text" onClick={closeModal}>cancel</ModalButton>
-                                <ModalButton variant='contained' onClick={handleNextStep} width='80px' >next</ModalButton>
-                            </ModalActions>
-                        </>
-                    )}
-                    {activeStep === 1 && (
-                        <>
-                            <ModalActions>
-                                <ModalButton variant="text" onClick={handleStepBack}>back</ModalButton>
-                                <ModalButton variant='contained' onClick={handleNextStep} width='100px' >invest { valueText(investmentValue[0]  ) }</ModalButton>
-                            </ModalActions>
-                        </>
-                    )}
                     {activeStep === 2 && (
                         <>
                             <ModalActions>
@@ -407,7 +424,7 @@ const PostModal = ( props ) => {
                 </InvestForm>
             </Fade>
 
-        </Modal>
+        </CustomModal>
     )
 }
 export default PostModal;

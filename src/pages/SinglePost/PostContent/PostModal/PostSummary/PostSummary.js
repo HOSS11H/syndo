@@ -5,11 +5,11 @@ const PostWrapper = styled.div`
     border-radius: 8px;
     overflow: hidden;
     padding: 40px 35px 35px;
-    background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? 'transparent' : '#eaeaea'  };
+    background-color: ${ ( { theme } ) => theme.palette.mode === 'dark' ? theme.vars.black : '#eaeaea'  };
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
     @media screen and (max-width: 900px) {
         max-width: 370px;
-        margin: 0 auto;
+        margin: 50px auto 0;
     }
     h3 {
         font-size: 13px;

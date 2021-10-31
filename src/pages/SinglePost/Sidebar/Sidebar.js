@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import Post from '../../../components/ExplorePosts/Post/Post';
-import AhlMasr from '../../../images/logos/AhlMasr.png';
 import Camel from '../../../images/logos/camel.jpg';
 import Syndo from '../../../images/logos/syndo.jpg';
 import PostsContext from '../../../store/posts-context';

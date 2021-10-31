@@ -48,7 +48,7 @@ const StyledLink = styled(NavLink)`
 const NavigationItem = (props) => (
     <NavigationItemWrapper>
         <StyledLink to={props.link} 
-            activeClassName='active' exact={props.exact}>{props.children}</StyledLink>
+            activeClassName='active' exact={props.exact} onClick={props.clicked}>{props.children}</StyledLink>
     </NavigationItemWrapper>
 );
 
