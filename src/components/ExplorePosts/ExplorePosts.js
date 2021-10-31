@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import PostsContext from '../../store/posts-context';
 import styled from 'styled-components';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -5,8 +7,6 @@ import { useHistory } from 'react-router-dom';
 import Heading from '../UI/Heading/Heading';
 import { NextButton } from '../UI/Nav/Nav';
 import Post from './Post/Post';
-import Resala from '../../images/logos/resala.jpg';
-import AhlMasr from '../../images/logos/AhlMasr.png';
 
 const ExplorePostsWrapper = styled.div`
     margin: 60px 0 80px;
@@ -32,83 +32,9 @@ const ExplorePosts = ( ) => {
         e.preventDefault();
         history.push('/posts')
     }
+    const PostsCtx = useContext(PostsContext);
 
-    const fetchedPosts = [
-        {   
-            id: Math.random() ,
-            title: 'post title',
-            img: Resala,
-            postClass: 'a',
-            endDate: '11/10/2021',
-            desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
-            progress: 60,
-            infos: {
-                goal: '1,000,000',
-                rate: '12%',
-                tenor: '12 months',
-                invested: '500,000',
-                investors: '5',
-                skin: '5%'
-            },
-            tags: ['loan', 'industry'],
-        },
-        {   
-            id: Math.random() ,
-            title: 'post title',
-            img: AhlMasr,
-            postClass: 'a',
-            endDate: '11/10/2021',
-            desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
-            progress: 60,
-            infos: {
-                goal: '1,000,000',
-                rate: '12%',
-                tenor: '12 months',
-                invested: '500,000',
-                investors: '5',
-                skin: '5%'
-            },
-            tags: ['loan', 'industry'],
-        },
-        {   
-            id: Math.random() ,
-            title: 'post title',
-            img: Resala,
-            postClass: 'a',
-            endDate: '11/10/2021',
-            desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
-            progress: 60,
-            infos: {
-                goal: '1,000,000',
-                rate: '12%',
-                tenor: '12 months',
-                invested: '500,000',
-                investors: '5',
-                skin: '5%'
-            },
-            tags: ['loan', 'industry'],
-        },
-        {   
-            id: Math.random() ,
-            title: 'post title',
-            img: AhlMasr,
-            postClass: 'a',
-            endDate: '11/10/2021',
-            desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
-            progress: 60,
-            infos: {
-                goal: '1,000,000',
-                rate: '12%',
-                tenor: '12 months',
-                invested: '500,000',
-                investors: '5',
-                skin: '5%'
-            },
-            tags: ['loan', 'industry'],
-        },
-    ]
-
-    const loadedPosts = fetchedPosts.map( (post) => {
+    const loadedPosts = PostsCtx.posts.map( (post) => {
         return (
             <Grid item key={post.id} xs={12} sm={6} md={3}>
                 <Post id={ post.id } title={ post.title } img={post.img} postClass={post.postClass} endDate={post.endDate} desc={post.desc} progress={post.progress} infos={post.infos} tags={post.tags} />

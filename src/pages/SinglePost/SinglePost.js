@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ThemeContext from '../../store/theme-context';
 import { NavLink } from 'react-router-dom';
 
@@ -7,15 +7,16 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-
-import Resala from '../../images/logos/resala.jpg';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import PostContent from './PostContent/PostContent';
 import Sidebar from './Sidebar/Sidebar';
+import PostsContext from '../../store/posts-context';
 
 const ComponentWrapper = styled.div`
     padding-top: 170px;
     padding-bottom: 123px;
+    min-height: 100vh;
     @media screen and (max-width:900px) {
         padding-bottom: 53px;
     }
@@ -42,52 +43,50 @@ const CurrentPage = styled.p`
 
 const SinglePost =  ( props ) => {
 
+    const { match } = props;
+
     const themeCtx = useContext(ThemeContext);
 
-    const fetchedPost = [
-        {   
-            id: Math.random() ,
-            title: 'post title',
-            img: Resala,
-            postClass: 'a',
-            endDate: '11/10/2021',
-            desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
-            progress: 60,
-            infos: {
-                goal: '1,000,000',
-                rate: '12%',
-                tenor: '12 months',
-                invested: '500,000',
-                investors: '5',
-                skin: '5%'
-            },
-            tags: ['loan', 'industry'],
-        },
-    ]
+    const postsCtx = useContext(PostsContext);
+
+    const [ selectedPost , setSelectedPost ] = useState(null);
+    const [ selectedPostIndex , setSelectedPostIndex ] = useState(null);
+
+    useEffect(() => {
+        const itemIndex =  postsCtx.posts.findIndex( item => item.id === match.params.postId );
+        setSelectedPost(postsCtx.posts[itemIndex])
+        setSelectedPostIndex(itemIndex)
+
+    }, [postsCtx, match])
 
     
     return ( 
         <ComponentWrapper>
-            <Container maxWidth="lg">
-                <BreadcrumbsWrapper>
-                    <Breadcrumbs sx={ {'& .MuiBreadcrumbs-separator': { margin: '0', } , } } 
-                        separator={<NavigateNextIcon fontSize="small" sx={ { color: themeCtx.theme.vars.primary } } />} 
-                        aria-label="breadcrumb">
-                            <StyledLink to="/">Home</StyledLink>
-                            <StyledLink to="/posts">posts</StyledLink>
-                            <CurrentPage>post title</CurrentPage>
-                    </Breadcrumbs>
-                </BreadcrumbsWrapper>
-                <Grid container>
-                    <Grid item xs={12} md={6}>
-                        <PostContent />
+            {selectedPost ? (
+                <Container maxWidth="lg">
+                    <BreadcrumbsWrapper>
+                        <Breadcrumbs sx={ {'& .MuiBreadcrumbs-separator': { margin: '0', } , } } 
+                            separator={<NavigateNextIcon fontSize="small" sx={ { color: themeCtx.theme.vars.primary } } />} 
+                            aria-label="breadcrumb">
+                                <StyledLink to="/">Home</StyledLink>
+                                <StyledLink to="/posts">posts</StyledLink>
+                                <CurrentPage>{selectedPost.title}</CurrentPage>
+                        </Breadcrumbs>
+                    </BreadcrumbsWrapper>
+                    <Grid container>
+                        <Grid item xs={12} md={6}>
+                            <PostContent fetchedPost={selectedPost} />
+                        </Grid>
+                        <Grid item xs={12} md={3} />
+                        <Grid item xs={12} md={3}>
+                            <Sidebar postIndex={selectedPostIndex} />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={3} />
-                    <Grid item xs={12} md={3}>
-                        <Sidebar />
-                    </Grid>
-                </Grid>
-            </Container>
+                </Container>
+                ) : (
+                    <CircularProgress />
+                ) 
+            }
         </ComponentWrapper>
     );
 }

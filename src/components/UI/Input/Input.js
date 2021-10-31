@@ -42,6 +42,7 @@ const InputContainer = styled.div`
 `
 
 const ErrorMessage = styled.label`
+    font-size: 12px;
     margin-top: 3px;
     color: #DF1338;
     text-transform: capitalize;

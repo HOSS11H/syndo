@@ -142,7 +142,7 @@ const Post = ( props ) => {
         console.log('s');
         authCtx.login(Math.random())
         themeCtx.toggleMode();
-        history.push(`posts/${props.id}`);
+        history.replace(`posts/${props.id}`);
     }
 
     const loadedTags = props.tags.map( ( tag , index ) => {

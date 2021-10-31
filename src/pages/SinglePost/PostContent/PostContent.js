@@ -3,8 +3,6 @@ import ThemeContext from '../../../store/theme-context';
 
 import styled from 'styled-components';
 
-import Resala from '../../../images/logos/resala.jpg';
-import ChartImg from '../../../images/charts/chart.png';
 import Client from '../../../images/clients/client.jpg';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -290,6 +288,8 @@ function a11yProps(index) {
 
 const PostContent = ( props ) => {
 
+    const { fetchedPost } = props;
+
     const [ currentTab , setCurrentTab ] = useState(1);
 
     const [ modalOpened , setModalOpened ] = useState(false);
@@ -308,16 +308,16 @@ const PostContent = ( props ) => {
         setModalOpened(false);
     };
 
-    const loadedTags = ['loan', 'industry'].map( ( tag , index ) => {
+    const loadedTags = fetchedPost.tags.map( ( tag , index ) => {
         return <Tag key={index}>{tag}</Tag>
     })
 
     return (  
         <ContentWrapper>
             <PostHead>
-                <PostImage src={Resala} />
-                <PostTitle>Post Title</PostTitle>
-                <AmountRaised>100,000 EGP raised</AmountRaised>
+                <PostImage src={fetchedPost.img} />
+                <PostTitle>{fetchedPost.title}</PostTitle>
+                <AmountRaised>{fetchedPost.infos.invested} EGP raised</AmountRaised>
                 <PostTags>
                     {loadedTags}
                 </PostTags>
@@ -334,7 +334,7 @@ const PostContent = ( props ) => {
                 </PostSocials>
                 <InvestButton onClick={openModalHandler} disabled={modalOpened} >invest now</InvestButton>
             </PostHead>
-            <PostModal show={modalOpened} closeModal={closeModalHandler} />
+            <PostModal show={modalOpened} closeModal={closeModalHandler} fetchedPost={fetchedPost} />
             <Tabs value={currentTab} onChange={currentTabHandler} aria-label="basic tabs example" 
                 sx= { { borderBottom: `1px solid ${themeCtx.theme.palette.mode === 'dark' ? themeCtx.theme.vars.white : themeCtx.theme.vars.black}`, 
                 '& .MuiTabs-indicator': { backgroundColor: `${themeCtx.theme.palette.mode === 'dark' ? themeCtx.theme.vars.white : themeCtx.theme.vars.black}` },  }  }>
@@ -364,15 +364,15 @@ const PostContent = ( props ) => {
                 <TabContent>
                     <BlockInfo>
                         <h3>about the company</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil standard dummy text ever fugerspiciatis collapsing 1500s.</p>
+                        <p>{fetchedPost.about}</p>
                     </BlockInfo>
                     <BlockInfo>
                         <h4>products &amp; services</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil standard dummy text ever fugerspiciatis collapsing 1500s.</p>
+                        <p>{fetchedPost.about}</p>
                     </BlockInfo>
                     <BlockInfo>
                         <h4>competitive landscape</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil standard dummy text ever fugerspiciatis collapsing 1500s.</p>
+                        <p>{fetchedPost.about}</p>
                     </BlockInfo>
                     <BlockInfo>
                         <h4>company size</h4>
@@ -380,10 +380,10 @@ const PostContent = ( props ) => {
                     </BlockInfo>
                     <BlockInfo>
                         <h4>business model</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil standard dummy text ever fugerspiciatis collapsing 1500s.</p>
+                        <p>{fetchedPost.about}</p>
                         <Grid container >
                             <Grid item xs={12} md={6} >
-                                <ModelImage src={Resala} />
+                                <ModelImage src={fetchedPost.img} />
                             </Grid>
                         </Grid>
                     </BlockInfo>
@@ -433,67 +433,47 @@ const PostContent = ( props ) => {
                     </BlockStats>
                     <BlockCharts>
                         <Grid container spacing={{ xs: 0, sm: 3, md: 4 }} >
-                            <Grid item xs={12} sm={6} >
-                                <Chart>
-                                    <ChartImage src={ChartImg} />
-                                    <h5>graph 1</h5>
-                                </Chart>
-                            </Grid>
-                            <Grid item xs={12} sm={6} >
-                                <Chart>
-                                    <ChartImage src={ChartImg} />
-                                    <h5>graph 2</h5>
-                                </Chart>
-                            </Grid>
+                            { fetchedPost.charts.map( (item, index) => {
+                                return (
+                                    <Grid key={index} item xs={12} sm={6} >
+                                        <Chart>
+                                            <ChartImage src={item.src} />
+                                            <h5>graph {item.num}</h5>
+                                        </Chart>
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
                     </BlockCharts>
                     <BlockCards >
                         <h4>key clients</h4>
                         <Grid container spacing={4} >
-                            <Grid item xs={6} sm={4} >
-                                <Card>
-                                    <CardImg src={Client} />
-                                    <h5>client 1</h5>
-                                </Card>
-                            </Grid>
-                            <Grid item xs={6} sm={4}  >
-                                <Card>
-                                    <CardImg src={Client} />
-                                    <h5>client 2</h5>
-                                </Card>
-                            </Grid>
-                            <Grid item xs={12} sm={4}  >
-                                <Card>
-                                    <CardImg src={Client} />
-                                    <h5>client 3</h5>
-                                </Card>
-                            </Grid>
+                            { fetchedPost.clients.map( (item, index) => {
+                                return (
+                                    <Grid key={index} item xs={6} sm={4} >
+                                        <Card>
+                                            <CardImg src={item.src} />
+                                            <h5>client {item.num}</h5>
+                                        </Card>
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
                     </BlockCards>
                     <BlockCards >
                         <h4>founding team</h4>
                         <Grid container spacing={4} >
-                            <Grid item xs={6} sm={4} >
-                                <Card>
-                                    <CardImg src={Client} />
-                                    <h5>name</h5>
-                                    <p>job title</p>
-                                </Card>
-                            </Grid>
-                            <Grid item xs={6} sm={4}  >
-                                <Card>
-                                    <CardImg src={Client} />
-                                    <h5>name</h5>
-                                    <p>job title</p>
-                                </Card>
-                            </Grid>
-                            <Grid item xs={12} sm={4}  >
-                                <Card>
-                                    <CardImg src={Client} />
-                                    <h5>name</h5>
-                                    <p>job title</p>
-                                </Card>
-                            </Grid>
+                            { fetchedPost.team.map( (item, index) => {
+                                return (
+                                    <Grid key={index} item xs={6} sm={4} >
+                                        <Card>
+                                            <CardImg src={item.src} />
+                                            <h5>{item.name}</h5>
+                                            <p>{item.title}</p>
+                                        </Card>
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
                     </BlockCards>
                 </TabContent>

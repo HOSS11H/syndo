@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import Post from '../../../components/ExplorePosts/Post/Post';
 import AhlMasr from '../../../images/logos/AhlMasr.png';
 import Camel from '../../../images/logos/camel.jpg';
 import Syndo from '../../../images/logos/syndo.jpg';
+import PostsContext from '../../../store/posts-context';
 
 const SidebarWrapper = styled.div`
     @media screen and (max-width:900px) {
@@ -43,37 +45,23 @@ const SponsorCard = styled.div`
 
 
 const Sidebar = props => {
+    
+    const postsCtx = useContext(PostsContext)
 
-    const fetchedPosts = [
-        {   
-            id: Math.random() ,
-            title: 'post title',
-            img: AhlMasr,
-            postClass: 'a',
-            endDate: '11/10/2021',
-            desc: 'Lorem ipsum dolor sit amet consectetur da Ecperm elit. Iure adipisci nihil fugerspiciatis collapsing 1500s.',
-            progress: 60,
-            infos: {
-                goal: '1,000,000',
-                rate: '12%',
-                tenor: '12 months',
-                invested: '500,000',
-                investors: '5',
-                skin: '5%'
-            },
-            tags: ['loan', 'industry'],
-        },
-    ]
+    let nextPostIndex;
 
-    const loadedPosts = fetchedPosts.map( (post) => {
-        return (
-            <Post key={ post.id } id={ post.id } title={ post.title } img={post.img} postClass={post.postClass} endDate={post.endDate} desc={post.desc} progress={post.progress} infos={post.infos} tags={post.tags} />
-        )
-    })
+    if ( props.postIndex < ( postsCtx.posts.length - 1 ) ) {
+        nextPostIndex = props.postIndex + 1
+    } else {
+        nextPostIndex = props.postIndex + 1
+    }
+
+    const loadedPost = postsCtx.posts[nextPostIndex]
 
     return (
         <SidebarWrapper>
-            {loadedPosts}
+            <Post key={ loadedPost.id } id={ loadedPost.id } title={ loadedPost.title } img={loadedPost.img} postClass={loadedPost.postClass} 
+                endDate={loadedPost.endDate} desc={loadedPost.desc} progress={loadedPost.progress} infos={loadedPost.infos} tags={loadedPost.tags} />
             <SponsorCard>
                 <img src={Camel} alt='Sponsor' />
                 <h5>lead invsetor</h5>

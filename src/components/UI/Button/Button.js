@@ -16,8 +16,8 @@ const CustomButton = styled(Button)`
         text-transform: capitalize;
     }
     &.MuiButton-contained {
-        width: ${ ( { width } ) => width };
-        padding: 0 15px;
+        min-width: ${ ( { width } ) => width };
+        padding: 0 10px;
         height: 30px;
         display: inline-flex;
         justify-content: center;
@@ -32,7 +32,6 @@ const CustomButton = styled(Button)`
         border-radius: 6px;
         transition: 0.3s ease-in-out;
         text-transform: capitalize;
-        min-width: unset;
         box-shadow: none;
     }
 `

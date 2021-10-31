@@ -5,17 +5,20 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeContextProvider } from './store/theme-context';
 import { AuthContextProvider } from './store/auth-context';
+import { PostsContextProvider } from './store/posts-context';
 import GlobalStyle from './styles/globalStyles';
 
 const app = (
   <React.StrictMode>
       <BrowserRouter>
-        <AuthContextProvider>
-          <ThemeContextProvider>
-            <GlobalStyle />
-            <App />
-          </ThemeContextProvider >
-        </AuthContextProvider>
+        <PostsContextProvider>
+          <AuthContextProvider>
+            <ThemeContextProvider>
+              <GlobalStyle />
+              <App />
+            </ThemeContextProvider >
+          </AuthContextProvider>
+        </PostsContextProvider>
       </BrowserRouter>
   </React.StrictMode>
 )
