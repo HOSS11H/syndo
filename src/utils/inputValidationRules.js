@@ -60,7 +60,6 @@ export function isNumberRule(inputName) {
         'isNumber',
         `${inputName} must be a number`,
         (inputValue, formObj) => {
-            console.log('w');
             return !isNaN(inputValue)
         }    
     );

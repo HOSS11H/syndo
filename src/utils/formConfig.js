@@ -70,3 +70,57 @@ export const investmentForm = {
         ],
     },
 };
+
+export const searchForm = {
+    search: {
+        ...createFormFieldConfig('', 'search', 'text'),
+    },
+    status: {
+        ...createFormFieldConfig('status', 'status', 'select', '',
+            [
+                {
+                    value: 'status 1',
+                    label: 'status 1',
+                } , 
+                {
+                    value: 'status 2',
+                    label: 'status 2',
+                } , 
+            ] ,
+            true,
+            true
+        ),
+    },
+    type: {
+        ...createFormFieldConfig('type', 'type', 'select', '',
+            [
+                {
+                    value: 'status 1',
+                    label: 'status 1',
+                } , 
+                {
+                    value: 'status 2',
+                    label: 'status 2',
+                } , 
+            ] ,
+            true,
+            true
+        ),
+    },
+    mostFunded: {
+        ...createFormFieldConfig('most funded', 'mostFunded', 'select', '',
+            [
+                {
+                    value: 'status 1',
+                    label: 'status 1',
+                } , 
+                {
+                    value: 'status 2',
+                    label: 'status 2',
+                } , 
+            ] ,
+            true,
+            true
+        ),
+    },
+};

@@ -26,7 +26,6 @@ const NavigationItems = ( props ) => {
     
     const userLoginHandler = ( e ) => {
         e.preventDefault();
-        console.log('f')
         authCtx.login(Math.random())
     }
     

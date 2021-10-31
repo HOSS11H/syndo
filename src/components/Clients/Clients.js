@@ -7,15 +7,16 @@ import ClientImg from '../../images//clients/client.jpg';
 import Client from './Client/Client';
 import { PrevButton, NextButton } from '../UI/Nav/Nav';
 
-// Direct React component imports
-import { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
+import SwiperCore, { Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// swiper bundle styles
+import 'swiper/swiper-bundle.min.css'
 
 
+// modules styles
 
-// Import Swiper styles
-import 'swiper/swiper.min.css'; // core Swiper
-import 'swiper/modules/navigation/navigation.min.css'; // Navigation module
+SwiperCore.use([Navigation]);
 
 const ClientsWrapper = styled.div`
     margin: 70px 0 90px;
@@ -38,7 +39,10 @@ const NavWrapper = styled.div`
 
 const Clients = ( ) => {
     
+    const navigationPrevRef = useRef();
+    const navigationNextRef = useRef();
     const swiperRef = useRef();
+
 
     const fetchedClients = [ 
         {
@@ -77,11 +81,8 @@ const Clients = ( ) => {
                 </Grid>
                 <Swiper
                     ref={swiperRef}
-                    modules={[Navigation]}
                     spaceBetween={20}
                     slidesPerView={2}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
                     autoplay={true}
                     loop={true}
                     breakpoints={{
@@ -98,9 +99,9 @@ const Clients = ( ) => {
                     {loadedClients}
                 </Swiper>
                 <NavWrapper>
-                    <PrevButton onClick={ ( ) => swiperRef.current.swiper.slidePrev() } />
+                    <PrevButton ref={navigationPrevRef} onClick={() => swiperRef.current.swiper.slidePrev()} />
                     <span></span>
-                    <NextButton onClick={ ( ) => swiperRef.current.swiper.slideNext() } />
+                    <NextButton ref={navigationNextRef} onClick={() => swiperRef.current.swiper.slideNext()} />
                 </NavWrapper>
             </Container>
         </ClientsWrapper>

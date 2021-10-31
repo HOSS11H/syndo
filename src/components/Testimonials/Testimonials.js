@@ -5,13 +5,17 @@ import Heading from '../UI/Heading/Heading';
 import Review from './Review/Review';
 import ClientImg from '../../images/client.png';
 
-// Direct React component imports
-import { Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 
-// Styles must use direct files imports
-import 'swiper/swiper.min.css'; // core Swiper
-import 'swiper/modules/autoplay/autoplay.min.css'; // Autoplay module
+import SwiperCore, { Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// swiper bundle styles
+import 'swiper/swiper-bundle.min.css'
+
+
+// modules styles
+
+SwiperCore.use([Autoplay]);
 
 
 const TestimonialsWrapper = styled.div`
@@ -71,8 +75,6 @@ const Testimonials = ( ) => {
                     modules={[Autoplay]}
                     spaceBetween={0}
                     slidesPerView={1}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
                     autoplay={true}
                     loop={true}
                     breakpoints={{
